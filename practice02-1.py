@@ -29,9 +29,10 @@ def dfs(node,end):
             if distance[i] == -1:
                 distance[i] = distance[node]+d
                 stack.append(i)
+
     if end == 1:
         return distance.index(max(distance))
     else:
-        return max(distance)
+        print(max(distance))
 
-print(dfs(dfs(0,1),2))
+dfs(dfs(1,1),2)
