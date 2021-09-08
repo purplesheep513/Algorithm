@@ -7,32 +7,30 @@
 #생각하기 너무 어렵다. 더 생각해보고 내일 해결할 수 있도록 해야겠다.
 #고민 고민 하다가 남들이 생각한 방식을 봤다. 가장 최대 distance의 리프노드를 구해주고 그곳에서 최대값을 구해주면 된다고 되어있었다. 이제 시험해 볼 것이다.
 
+#드디어 알겠다. 최대지름은 최대 distance를 포함하고 있는 경로를 지날테니 그것의 리프노드를 구하고 거기서 최대값을 구하면 다른 리프노드로 도달할 것이다
+
 import sys
-
 N = int(sys.stdin.readline())
-graph = [[] for _ in range(N+1)] 
+graph = [[] for _ in range(N+1)]
+for i in range(N-1):
+    parent_node, child_node, distance = map(int, sys.stdin.readline().split())
+    graph[child_node].append((parent_node,distance))
+    graph[parent_node].append((child_node,distance))
 
-
-for _ in range(N-1):
-    p,c,d = map(int,sys.stdin.readline().split())
-    graph[p].append((c,d))
-    graph[c].append((p,d))
-
-def dfs(node,end):
+def dfs(node, fin):
     stack = []
     distance = [-1 for _ in range(N+1)]
-    distance[node] = 0
     stack.append(node)
+    distance[node] = 0
     while stack:
         node = stack.pop()
         for i,d in graph[node]:
-            if distance[i] == -1:
-                distance[i] = distance[node]+d
+            if distance[i] == -1 :
                 stack.append(i)
-
-    if end == 1:
+                distance[i] = distance[node]+d
+    if fin :
         return distance.index(max(distance))
-    else:
-        print(max(distance))
+    else :
+        return max(distance)
 
-dfs(dfs(1,1),2)
+print(dfs(dfs(1,True),False))
