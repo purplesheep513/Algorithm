@@ -15,17 +15,13 @@ for _ in range(T):
 
         while stack:
             n = stack.pop()
-            if n == graph[n]:#사이클o
+            if visit[graph[n]] == 1:#사이클o
                 answer.add(n)
             elif visit[graph[n]] == 0:#방문을 아직 안 한 것
                 visit[graph[n]] = 1
                 stack.append(graph[n])
-            elif visit[graph[n]] == -1 : #사이클x
-                continue 
-            else :#사이클o
-                answer.add(n)
 
     for i in range(1,N+1):
         dfs(i)
 
-    print(len(graph)-len(answer)-1)
+    print(N-len(answer))
