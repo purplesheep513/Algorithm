@@ -19,5 +19,3 @@ def bfs(x):
                     queue.append(nx)
 
 bfs(N)
-
-#푸쉬 왜 안되는거야 커밋을 했는데 no contributions라고 해서 화남
